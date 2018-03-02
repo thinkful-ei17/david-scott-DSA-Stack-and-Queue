@@ -36,13 +36,39 @@ function matchParens(s) {
     //loop over s
   for(let i=0; i < s.length; i++){
     // console.log('i:', i);
-    if(s[i] === '('){
-        stack.push(i);
+    if(s[i] === '(' || s[i] === '[' || s[i] === '{'){
+        stack.push({item: s[i], location: i});
     }
-    else if(s[i] === ')' && stack.pop() === null){
-        console.log(`Not a match: ) charAt: `, i);
-        return false;
-    }
+    else if(s[i] === ')'){ 
+        const popped = stack.pop();
+        if (popped === {}){
+            console.log(`Extra: ')', at:`,i);
+            return false;
+        }
+        else if (popped.item === '['){
+            console.log(`Expecting: ']', found: ')', at:${i}`);
+            return false;
+        }
+        else if (popped.item === '{'){
+            console.log(`Expecting: '}', found: ')', at:${i}`);
+            return false;
+        }
+
+    // else if(s[i] === ')'){ 
+    //     const popped = stack.pop();
+    //     if (popped === {}){
+    //         console.log(`Extra: ')', at:`,i);
+    //         return false;
+    //     }
+    //     else if (popped.item === '['){
+    //         console.log(`Expecting: ']', found: ')', at:${i}`);
+    //         return false;
+    //     }
+    //     else if (popped.item === '{'){
+    //         console.log(`Expecting: '}', found: ')', at:${i}`);
+    //         return false;
+    //     }    
+
   }
   if(stack.top !== null){
       console.log(`Not a match: ( ${stack.pop()}`);
