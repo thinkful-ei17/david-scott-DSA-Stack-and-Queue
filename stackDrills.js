@@ -2,8 +2,14 @@ const {Stack} = require('./stack.js');
 
 const stack = new Stack();
 
-//string.split()
-//for each letter => stack.push(letter);
+function is_palindrome(s) {
+    s = s.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+
+//loop over string and push characters into stack;
+
 //Stack.pop until stack is empty;
-//save to an aray
+
 //compare what when in with what came out
+
+}
+
