@@ -39,14 +39,9 @@ function matchParens(s) {
     if(s[i] === '('){
         stack.push(i);
     }
-    else if(s[i] === ')'){
-        if(stack.top !== null){
-        stack.pop();
-        }
-        else{
-            console.log(`Not a match: ) charAt: `, i);
-            return false;
-        }
+    else if(s[i] === ')' && stack.pop() === null){
+        console.log(`Not a match: ) charAt: `, i);
+        return false;
     }
   }
   if(stack.top !== null){
