@@ -39,12 +39,14 @@ function matchParens(s) {
     if(s[i] === '('){
         stack.push(i);
     }
-    else if(s[i] === ')' && stack.top !== null){
+    else if(s[i] === ')'){
+        if(stack.top !== null){
         stack.pop();
-    }
-    else if(s[i] === ')' && stack.top === null){
-        console.log(`Not a match: ) charAt: `, i);
-        return false;
+        }
+        else{
+            console.log(`Not a match: ) charAt: `, i);
+            return false;
+        }
     }
   }
   if(stack.top !== null){
@@ -57,11 +59,11 @@ function matchParens(s) {
   }
 }
 
-// console.log(matchParens('(1 + 1) - 3((2+4))')); //false
-// matchParens('(1+3) - 5'); //true
-// matchParens('1 +) = 75');//false
-// matchParens('(1 +1) = 2');//true
-matchParens('1((');//true
+console.log(matchParens('(1 + 1) - 3((2+4))')); //true
+console.log(matchParens('(1+3) - 5')); //true
+console.log(matchParens('1 +) = 75'));//false
+console.log(matchParens('(1 +1) = 2'));//true
+console.log(matchParens('1(('));//false
 
 //loop over s
 //if our char is ( we push to a stack.  If character is ) && is stack is not empty we pop

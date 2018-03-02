@@ -22,16 +22,18 @@ class Stack{
 
   pop(){
     const node = this.top;
+    if(!node){
+        return null
+    }
     this.top = this.top.next;
     return node.data;
   }
 
   peek() {
     if(this.top === null){
-      console.log('stack is empty!');
-      return;
+      return null;
     }
-    console.log(this.top.data);
+    return this.top.data;
   }
 
   display(){
