@@ -40,11 +40,12 @@ class Stack{
           return;
       }
       let currNode = this.top;
-
+        console.log('Top of Stack');
       while(currNode !== null){
           console.log(currNode.data);
           currNode = currNode.next;
       }
+      console.log('Bottom of Stack');
   }
 }
 
@@ -57,6 +58,9 @@ function main() {
   StarTrek.push('Scotty');
   console.log(StarTrek);
   StarTrek.peek();
+  StarTrek.display();
+  StarTrek.pop();
+  StarTrek.pop();
   StarTrek.display();
 }
 
