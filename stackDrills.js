@@ -34,24 +34,9 @@ const Stack = require('./stack.js');
 function matchParens(s) {
   const stack = new Stack();
 
-  //make an object to link together ( and ), [ and ], { and }
-    const pairs = [
-                {
-                  opening: '(', 
-                  closing:')'
-                }, 
-                {
-                    opening: '[', 
-                    closing:']'
-                }, 
-                {
-                    opening: '{', 
-                    closing:'}'
-                }
-            ]
   //loop over s
   for(let i=0; i < s.length; i++){
-    // console.log('i:', i);
+
     if(s[i] === '(' || s[i] === '[' || s[i] === '{'){
       stack.push({item: s[i], location: i});
     }
@@ -59,13 +44,29 @@ function matchParens(s) {
       const popped = stack.pop();
       console.log('popped', popped);
       if(popped.item !== '('){
-          console.log('Not a match at:', i);
+          console.log(`Not matched at: s[${i}]`);
           return false;
       }  
     }
+    else if(s[i] === ']'){ 
+        const popped = stack.pop();
+        console.log('popped', popped);
+        if(popped.item !== '['){
+            console.log(`Not matched at: s[${i}]`);
+            return false;
+        } 
+    }
+    else if(s[i] === '}'){ 
+        const popped = stack.pop();
+        console.log('popped', popped);
+        if(popped.item !== '{'){
+            console.log(`Not matched at: s[${i}]`);
+            return false;
+        } 
+    }          
   }
   if(stack.top !== null){
-    console.log(`Not a match: ( ${stack.pop()}`);
+    console.log(`Unclosed: ${stack.peek().item}, at: s[${stack.peek().location}]`);
     return false;
   }
   else{
@@ -76,9 +77,9 @@ function matchParens(s) {
 
 // console.log(matchParens('(1 + 1) - 3((2+4))')); //true
 // console.log(matchParens('(1+3) - 5')); //true
-console.log(matchParens('1 +) = 75'));//false
+// console.log(matchParens('1 +) = 75'));//false
 // console.log(matchParens('(1 +1) = 2'));//true
-// console.log(matchParens('1(('));//false
+console.log(matchParens('{[]}'));//false
 
 //loop over s
 //if our char is ( we push to a stack.  If character is ) && is stack is not empty we pop
@@ -119,4 +120,4 @@ s.push(1);
 s.push(6);
 s.push(5);
 
-console.log(sortStack(s));
+// console.log(sortStack(s));
