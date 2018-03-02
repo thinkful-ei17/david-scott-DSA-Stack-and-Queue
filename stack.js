@@ -35,17 +35,17 @@ class Stack{
   }
 
   display(){
-      if(this.top === null){
-          console.log('stack is empty');
-          return;
-      }
-      let currNode = this.top;
-        console.log('Top of Stack');
-      while(currNode !== null){
-          console.log(currNode.data);
-          currNode = currNode.next;
-      }
-      console.log('Bottom of Stack');
+    if(this.top === null){
+      console.log('stack is empty');
+      return;
+    }
+    let currNode = this.top;
+    console.log('Top of Stack');
+    while(currNode !== null){
+      console.log(currNode.data);
+      currNode = currNode.next;
+    }
+    console.log('Bottom of Stack');
   }
 }
 
@@ -64,6 +64,6 @@ function main() {
   StarTrek.display();
 }
 
-main();
+// main();
 
-module.exports = {Stack};
+module.exports = Stack;
