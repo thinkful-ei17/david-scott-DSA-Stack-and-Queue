@@ -23,7 +23,7 @@ class Stack{
   pop(){
     const node = this.top;
     if(!node){
-        return {};
+      return {};
     }
     this.top = this.top.next;
     return node.data;
