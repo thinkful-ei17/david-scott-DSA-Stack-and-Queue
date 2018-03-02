@@ -33,6 +33,22 @@ const Stack = require('./stack.js');
 
 function matchParens(s) {
   const stack = new Stack();
+
+  //make an object to link together ( and ), [ and ], { and }
+    const pairs = [
+                {
+                  opening: '(', 
+                  closing:')'
+                }, 
+                {
+                    opening: '[', 
+                    closing:']'
+                }, 
+                {
+                    opening: '{', 
+                    closing:'}'
+                }
+            ]
   //loop over s
   for(let i=0; i < s.length; i++){
     // console.log('i:', i);
@@ -41,33 +57,11 @@ function matchParens(s) {
     }
     else if(s[i] === ')'){ 
       const popped = stack.pop();
-      if (popped === {}){
-        console.log('Extra: \')\', at:',i);
-        return false;
-      }
-      else if (popped.item === '['){
-        console.log(`Expecting: ']', found: ')', at:${i}`);
-        return false;
-      }
-      else if (popped.item === '{'){
-        console.log(`Expecting: '}', found: ')', at:${i}`);
-        return false;
-      }
-
-    // else if(s[i] === ')'){ 
-    //     const popped = stack.pop();
-    //     if (popped === {}){
-    //         console.log(`Extra: ')', at:`,i);
-    //         return false;
-    //     }
-    //     else if (popped.item === '['){
-    //         console.log(`Expecting: ']', found: ')', at:${i}`);
-    //         return false;
-    //     }
-    //     else if (popped.item === '{'){
-    //         console.log(`Expecting: '}', found: ')', at:${i}`);
-    //         return false;
-    //     }    
+      console.log('popped', popped);
+      if(popped.item !== '('){
+          console.log('Not a match at:', i);
+          return false;
+      }  
     }
   }
   if(stack.top !== null){
@@ -80,11 +74,11 @@ function matchParens(s) {
   }
 }
 
-console.log(matchParens('(1 + 1) - 3((2+4))')); //true
-console.log(matchParens('(1+3) - 5')); //true
+// console.log(matchParens('(1 + 1) - 3((2+4))')); //true
+// console.log(matchParens('(1+3) - 5')); //true
 console.log(matchParens('1 +) = 75'));//false
-console.log(matchParens('(1 +1) = 2'));//true
-console.log(matchParens('1(('));//false
+// console.log(matchParens('(1 +1) = 2'));//true
+// console.log(matchParens('1(('));//false
 
 //loop over s
 //if our char is ( we push to a stack.  If character is ) && is stack is not empty we pop
