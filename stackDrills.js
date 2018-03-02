@@ -68,7 +68,7 @@ function matchParens(s) {
     //         console.log(`Expecting: '}', found: ')', at:${i}`);
     //         return false;
     //     }    
-
+    }
   }
   if(stack.top !== null){
       console.log(`Not a match: ( ${stack.pop()}`);
