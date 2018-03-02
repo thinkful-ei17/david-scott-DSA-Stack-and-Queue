@@ -33,6 +33,19 @@ class Stack{
     }
     console.log(this.top.data);
   }
+
+  display(){
+      if(this.top === null){
+          console.log('stack is empty');
+          return;
+      }
+      let currNode = this.top;
+
+      while(currNode !== null){
+          console.log(currNode.data);
+          currNode = currNode.next;
+      }
+  }
 }
 
 function main() {
@@ -44,6 +57,7 @@ function main() {
   StarTrek.push('Scotty');
   console.log(StarTrek);
   StarTrek.peek();
+  StarTrek.display();
 }
 
 main();
