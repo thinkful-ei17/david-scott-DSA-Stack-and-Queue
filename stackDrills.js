@@ -32,27 +32,27 @@ const Stack = require('./stack.js');
 // s = s.replace(/[^()])/g, '')
 
 function matchParens(s) {
-    const stack = new Stack();
-    //loop over s
+  const stack = new Stack();
+  //loop over s
   for(let i=0; i < s.length; i++){
     // console.log('i:', i);
     if(s[i] === '(' || s[i] === '[' || s[i] === '{'){
-        stack.push({item: s[i], location: i});
+      stack.push({item: s[i], location: i});
     }
     else if(s[i] === ')'){ 
-        const popped = stack.pop();
-        if (popped === {}){
-            console.log(`Extra: ')', at:`,i);
-            return false;
-        }
-        else if (popped.item === '['){
-            console.log(`Expecting: ']', found: ')', at:${i}`);
-            return false;
-        }
-        else if (popped.item === '{'){
-            console.log(`Expecting: '}', found: ')', at:${i}`);
-            return false;
-        }
+      const popped = stack.pop();
+      if (popped === {}){
+        console.log('Extra: \')\', at:',i);
+        return false;
+      }
+      else if (popped.item === '['){
+        console.log(`Expecting: ']', found: ')', at:${i}`);
+        return false;
+      }
+      else if (popped.item === '{'){
+        console.log(`Expecting: '}', found: ')', at:${i}`);
+        return false;
+      }
 
     // else if(s[i] === ')'){ 
     //     const popped = stack.pop();
@@ -68,14 +68,14 @@ function matchParens(s) {
     //         console.log(`Expecting: '}', found: ')', at:${i}`);
     //         return false;
     //     }    
-
+    }
   }
   if(stack.top !== null){
-      console.log(`Not a match: ( ${stack.pop()}`);
-      return false;
+    console.log(`Not a match: ( ${stack.pop()}`);
+    return false;
   }
   else{
-    console.log("It's a match!");
+    console.log('It\'s a match!');
     return true;
   }
 }
@@ -89,3 +89,40 @@ console.log(matchParens('1(('));//false
 //loop over s
 //if our char is ( we push to a stack.  If character is ) && is stack is not empty we pop
 // if we can't pop || if our stack is not empty at the end of the loop, we return false;
+
+// =========================== Sort Stack ==============================
+
+function sortStack(stack) {
+  if(stack.top === null) {
+    console.log('empty  stack');
+    return;
+  }
+  let temp;
+  const newStack = new Stack();
+  while(stack.top !== null) {
+    temp = stack.pop();
+    if(newStack.top === null) {
+      newStack.push(temp);
+    } 
+    else if(newStack.peek() >= temp) {
+      newStack.push(temp);
+    }
+    else {
+      while((newStack.peek() < temp) && (newStack.top !== null)) {
+        stack.push(newStack.pop());
+      }
+      newStack.push(temp);
+    }
+  }
+  return newStack;
+}
+
+let s = new Stack();
+s.push(3);
+s.push(2);
+s.push(4);
+s.push(1);
+s.push(6);
+s.push(5);
+
+console.log(sortStack(s));
