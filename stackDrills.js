@@ -1,3 +1,4 @@
+'use strict';
 const Stack = require('./stack.js');
 
 // =================== Palindrome =====================
@@ -44,25 +45,25 @@ function matchParens(s) {
       const popped = stack.pop();
       console.log('popped', popped);
       if(popped.item !== '('){
-          console.log(`Not matched at: s[${i}]`);
-          return false;
+        console.log(`Not matched at: s[${i}]`);
+        return false;
       }  
     }
     else if(s[i] === ']'){ 
-        const popped = stack.pop();
-        console.log('popped', popped);
-        if(popped.item !== '['){
-            console.log(`Not matched at: s[${i}]`);
-            return false;
-        } 
+      const popped = stack.pop();
+      console.log('popped', popped);
+      if(popped.item !== '['){
+        console.log(`Not matched at: s[${i}]`);
+        return false;
+      } 
     }
     else if(s[i] === '}'){ 
-        const popped = stack.pop();
-        console.log('popped', popped);
-        if(popped.item !== '{'){
-            console.log(`Not matched at: s[${i}]`);
-            return false;
-        } 
+      const popped = stack.pop();
+      console.log('popped', popped);
+      if(popped.item !== '{'){
+        console.log(`Not matched at: s[${i}]`);
+        return false;
+      } 
     }          
   }
   if(stack.top !== null){
