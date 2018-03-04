@@ -54,27 +54,72 @@ class Stack {
   }
 }
 
-const stack1 = new Stack();
-
-stack1.push(1);
-stack1.push(2);
-stack1.push(3);
-console.log(stack1.display());
 
 //implement a queue using two stacks
 
 //1 2 3 4 5
 
-//  1  
+// ========= first thought ============================================
+
+//enqueue => stack1 pop & push to stack2 until stack1 is empty
+//           add new node to stack1
+//          pop & push from stack2 to stack1 until stack1 is empty
+
+//dequeue => stack1 pop;
+
+//==============second thought =====================================
+
+//enqueue => stack1 push;
+//dequeue => stack1 pop & push to stack2 until stack1 is empty
+//           stack2 pop
+//          stack2 pop & push to stack1
+
+// first thought means everytime you add a new node, you have to move the list twice, but when you remove a node, you just take it off the top
+// second thought means you can push straight on, but each time you dequeue you have to move the list twice.  
+//So, they are basically the same
 
 
-//  2  =>   1
-//     =>  2
-//          1
-//  1   <=
-//  2
+// =================== Implement Thought Two ================
+function enqueue(q, data){
+  q.push(data);
+}
+
+function dequeue(q){
+  const tempStack = new Stack();
+  while(q.top !== null){
+    tempStack.push(q.pop());
+  }
+  const dataToDequeue = tempStack.pop();
+  while(tempStack.top !== null){
+    q.push(tempStack.pop());
+  }
+  return dataToDequeue;
+}
+
+function initializeQueue(q, arr){
+  arr.map(i => enqueue(q, i));
+}
+
+const animalQ = new Stack();
+const animals = ['giraffe', 'monkey', 'lion'];
+
+initializeQueue(animalQ, animals);
+
+console.log('expect giraffe:', dequeue(animalQ));
+console.log('expect monkey:', dequeue(animalQ));
 
 
-//  3       2
-//          1
-//  
+// const names = ['Scott', 'John', 'Oscar'];
+// const test = new Stack();
+// initializeQueue(test, names);
+// console.log(test.display());
+// dequeue(test);
+// console.log(test.display());
+// enqueue(test, 'George');
+// enqueue(test, 'Henry');
+// enqueue(test, 'Harriette');
+// console.log(test.display());
+// dequeue(test);
+// console.log(test.display());
+
+
