@@ -80,6 +80,7 @@ class Stack {
 
 
 // =================== Implement Thought Two ================
+
 function enqueue(q, data){
   q.push(data);
 }
@@ -96,18 +97,27 @@ function dequeue(q){
   return dataToDequeue;
 }
 
+//=============================================================
+
 function initializeQueue(q, arr){
   arr.map(i => enqueue(q, i));
 }
 
+
 const animalQ = new Stack();
 const animals = ['giraffe', 'monkey', 'lion'];
+
 
 initializeQueue(animalQ, animals);
 
 console.log('expect giraffe:', dequeue(animalQ));
 console.log('expect monkey:', dequeue(animalQ));
 
+enqueue(animalQ, 'turtle');
+enqueue(animalQ, 'hare');
+
+console.log('expect lion:', dequeue(animalQ));
+console.log('expect turtle:', dequeue(animalQ));
 
 // const names = ['Scott', 'John', 'Oscar'];
 // const test = new Stack();
