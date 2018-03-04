@@ -1,3 +1,5 @@
+'use strict';
+
 class _Node {
   constructor(data, next) {
     this.data = data;
